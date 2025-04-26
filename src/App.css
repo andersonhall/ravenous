@@ -18,6 +18,41 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.business {
+  text-align: left;
+}
+
+.business * {
+  margin: 0;
+  padding: 0;
+}
+
+.business-img {
+  width: 250px;
+  height: 250px;
+}
+
+.business-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.business-info-right {
+  text-align: right;
+}
+
+.business-category {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: olive;
+}
+
+.business-rating {
+  font-weight: bold;
+  color: olive;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
