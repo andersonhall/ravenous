@@ -1,13 +1,14 @@
+import { yelpSearch } from "../utils/yelpApi";
 import "./SearchBar.css";
 import { useState } from "react";
 
 const options = {
   "Best Match": "best_match",
-  "Highest Rated": "highest_rated",
-  "Most Reviewed": "most_reviewed",
+  "Highest Rated": "rating",
+  "Most Reviewed": "review_count",
 };
 
-export default function SearchBar() {
+export default function SearchBar({ setBusinesses }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
   const [sortOption, setSortOption] = useState("best_match");
@@ -18,18 +19,22 @@ export default function SearchBar() {
   };
 
   const handleSearchTermChange = (e) => {
-    setSearchTerm(e.target.value);
+    setSearchTerm(e.target.value.replaceAll(/[, ]/g, "_"));
+    console.log(searchTerm);
   };
 
   const handleLocationChange = (e) => {
-    setSearchLocation(e.target.value);
+    setSearchLocation(e.target.value.replaceAll(/[, ]/g, "_"));
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    console.log(
-      `Searching Yelp with ${searchTerm}, ${searchLocation}, ${sortOption}`
-    );
+    const data = await yelpSearch(searchTerm, searchLocation, sortOption);
+    if (data) {
+      setBusinesses(data);
+    } else {
+      console.log("No data found");
+    }
   };
 
   return (

@@ -1,10 +1,13 @@
 import "./App.css";
+import "./utils/yelpApi";
 
+import { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import BusinessList from "./components/BusinessList";
+import { yelpSearch } from "./utils/yelpApi";
 
 function App() {
-  const businesses = [
+  const [businesses, setBusinesses] = useState([
     {
       imageSrc:
         "https://content.codecademy.com/programs/react/ravenous/pizza.jpg",
@@ -41,10 +44,14 @@ function App() {
       rating: 1.5,
       reviewCount: 50,
     },
-  ];
+  ]);
   return (
     <>
-      <SearchBar />
+      <SearchBar
+        search={yelpSearch}
+        businesses={businesses}
+        setBusinesses={setBusinesses}
+      />
       <BusinessList businesses={businesses} />
     </>
   );
