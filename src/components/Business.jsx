@@ -1,3 +1,5 @@
+import "./Business.css";
+
 export default function Business({ business }) {
   return (
     <div className="business">
